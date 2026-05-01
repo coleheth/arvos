@@ -1,11 +1,13 @@
 #include <Arduino.h>
 #include "core/scheduler.hpp"
 #include "subsystems/statusLed/statusLed.hpp"
+#include "subsystems/example/example.hpp"
 
 #define ALLOWED_LOOP_MS 500
 
 Scheduler scheduler;
 StatusLEDSubsystem statusLed;
+ExampleSubsystem example;
 
 unsigned long last_loop;
 bool was_last_loop_overrun = false;
@@ -13,6 +15,7 @@ bool was_last_loop_overrun = false;
 void setup()
 {
   scheduler.addSubsystem(&statusLed);
+  scheduler.addSubsystem(&example);
   scheduler.setup();
 
   Event event = Event{EVENT_STATUS_UPDATE, 0};
